@@ -1,0 +1,19 @@
+hr {
+  display: block;
+  border-style: inset;
+  border-width: 0.1px;
+}
+.foxColor {
+  color: orange;
+}
+.foxPos {
+  margin-top: 50px;
+  margin-bottom: -50px;
+}
+.foxCloud {
+  display: none; //A enlever pour serve --lab
+  position: absolute;
+  width: 70%;
+  bottom: 0;
+  left: -30px;
+}

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nouvelle carte</ion-title>
+
+    <button (click)="backToHome()">
+      <ion-icon name="arrow-back" style="font-size: 40px; color: #db3200"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="scanContent" style="text-align: center; font-size: 18px;">Indiquez le <strong>nom du magasin</strong><br> pour ajouter la carte</p>
+
+  <form #registerForm="ngForm" style="text-align: center">
+    <ion-row>
+      <ion-col>
+        <ion-list inset *ngIf="result">
+          <ion-button style="margin-top: 130px" (click)="add()" ion-button round color="light" class="submit-btn" type="submit" [disabled]="!registerForm.form.valid">
+            Ajouter la carte
+          </ion-button>
+          <ion-input name="number" (keydown)="noSpace()" [value]="result.text" required readonly></ion-input>
+        </ion-list>
+          <ion-input style="margin-bottom: 50px" placeholder="> Nom du magasin" name="name" (keydown)="noSpace()" [(ngModel)]="cardCredentials.name" required></ion-input>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <div>
+    <ion-fab horizontal="center" slot="fixed">
+      <ion-fab-button (click)="scanBarcode()" type="submit" color="danger">
+        <ion-icon name="md-barcode"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 325 324" class="foxCloud">
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #db3200;
+        }
+      </style>
+    </defs>
+    <path id="background" class="cls-1" d="M-325,0V324H0V312.5A62.507,62.507,0,0,0-62.5,250,62.507,62.507,0,0,1-125,187.5,62.507,62.507,0,0,0-187.5,125,62.507,62.507,0,0,1-250,62.5,62.507,62.507,0,0,0-312.5,0Z" transform="translate(325)"/>
+  </svg>
+  <div class="manualBtn">
+    <ion-button class="manualBtn" (click)="addManual()" ion-button round color="light" class="submit-btn" type="submit">
+      Ajouter manuellement
+    </ion-button>
+  </div>
+</ion-content>

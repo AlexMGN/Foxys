@@ -1,0 +1,26 @@
+hr {
+  display: block;
+  border-style: inset;
+  border-width: 0.1px;
+}
+input {
+  background-color: transparent;
+  border: 0px solid;
+  height: 20px;
+  width: 160px;
+  color: #CCC;
+}
+.foxColor {
+  color: orange;
+}
+.capit {
+  text-transform: capitalize;
+}
+.registerForm {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+.submit-btn {
+  margin-top: 30px;
+}

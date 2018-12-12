@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Cartes
+    </ion-title>
+    <button (click)="addCard()">
+      <ion-icon name="add" style="font-size: 40px; color: #db3200"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <svg class="corner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 324 325">
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #db3200;
+        }
+      </style>
+    </defs>
+    <path id="background" class="cls-1" d="M-325,0V324H0V312.5A62.507,62.507,0,0,0-62.5,250,62.507,62.507,0,0,1-125,187.5,62.507,62.507,0,0,0-187.5,125,62.507,62.507,0,0,1-250,62.5,62.507,62.507,0,0,0-312.5,0Z" transform="translate(324 325) rotate(90)"/>
+  </svg>
+
+  <svg class="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 94">
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #db3200;
+        }
+      </style>
+    </defs>
+    <ellipse id="Ellipse_1" data-name="Ellipse 1" class="cls-1" cx="50" cy="47" rx="50" ry="47"/>
+  </svg>
+
+  <svg class="foot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 98">
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #db3200;
+        }
+      </style>
+    </defs>
+    <rect id="Rectangle_11" data-name="Rectangle 11" class="cls-1" width="444" height="98"/>
+  </svg>
+
+  <button class="logout" ion-button (click)="logout()">
+    <img src="../../assets/img/homefox.png" width="100">
+  </button>
+  <p class="logoutStyle" style="color: white">Logout</p>
+</ion-content>

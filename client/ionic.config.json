@@ -1,0 +1,7 @@
+{
+  "name": "Foxys",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
