@@ -6,13 +6,7 @@ module.exports = [
 		method: 'POST',
 		path: '/user',
 		validation: usersValidation.createUser,
-		handler: usersCtrl.createUser
-	},
-	{
-		method: 'POST',
-		path: '/users',
-		validation: usersValidation.createUser,
-		handler: usersCtrl.createUser
+		handler: usersCtrl.createUser,
 	},
 	{
 		method: 'POST',

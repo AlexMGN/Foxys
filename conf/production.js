@@ -10,5 +10,5 @@ module.exports = {
 			url: 'mongodb+srv://Hiick:5FiEe8yBHwNSKBH@cluster0-bzfup.gcp.mongodb.net/',
 			dbName: 'foxys'
 		}
-	}
+	},
 }
