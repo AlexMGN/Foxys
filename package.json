@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "mono dev",
-    "start": "cross-env NODE_ENV=production mono",
+    "start": "cross-env NODE_ENV=production HOST=0.0.0.0 mono",
     "lint": "eslint src/ conf/ test/",
     "test": "npm run lint && nyc ava --verbose --serial --fail-fast test/ && nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
