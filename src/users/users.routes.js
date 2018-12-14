@@ -1,23 +1,12 @@
 const usersValidation = require('./users.validation');
 const usersCtrl = require('./users.controller');
 
-
-const express = require('express')
-const app = express();
-
-app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	next();
-});
-
-
-module.exports = [
-	app.use(function (req, res, next) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		next();
-	}),
+module.exports = [{
+		method: 'POST',
+		path: '/users',
+		validation: usersValidation.createUser,
+		handler: usersCtrl.createUser
+	},
 	{
 		method: 'POST',
 		path: '/users',
