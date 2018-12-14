@@ -7,7 +7,7 @@ module.exports = {
 			logLevel: 'combined'
 		},
 		mongodb: {
-			url: 'cluster0-bzfup.gcp.mongodb.net:27017',
+			url: 'mongodb://cluster0-bzfup.gcp.mongodb.net:27017',
 			dbName: 'foxys'
 		}
 	}
