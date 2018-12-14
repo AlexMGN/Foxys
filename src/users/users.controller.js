@@ -1,17 +1,17 @@
-const { HttpError, jwt } = require('mono-core')
+const { HttpError } = require('mono-core')
 const { getFindOptions } = require('mono-mongodb')
 
-//const jwt = require('express-jwt-session')
-const production = require('../../conf/production').secret
+const jwt = require('express-jwt-session')
+const production = require('../../conf/production').mono.jwt.secret
 
 const bcrypt = require('bcryptjs')
 
 const users = require('./users.service')
 
 // Function for connect
-/*function createToken(user) {
+function createToken(user) {
 	return jwt.signToken({ email: user.email }, production, 150);
-}*/
+}
 
 exports.createUser = async (req, res) => {
 	users.get({
@@ -22,10 +22,9 @@ exports.createUser = async (req, res) => {
 		} else {
 			bcrypt.genSalt(10, (err, salt) => {
 				bcrypt.hash(req.body.password, salt, (err, passwordCrypt) => {
-					//req.body.token = jwt.signToken({ email: req.body.email }, production, 150)
-					const token = jwt.generateJWT(req.body)
+					req.body.token = jwt.signToken({ email: req.body.email }, production, 150)
 					users.create({
-						token: token,
+						token: req.body.token,
 						username: req.body.username,
 						email: req.body.email,
 						password: passwordCrypt,
