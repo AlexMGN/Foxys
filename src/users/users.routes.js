@@ -1,9 +1,10 @@
 const usersValidation = require('./users.validation');
 const usersCtrl = require('./users.controller');
 
-module.exports = [{
+module.exports = [
+	{
 		method: 'POST',
-		path: '/users',
+		path: '/user',
 		validation: usersValidation.createUser,
 		handler: usersCtrl.createUser
 	},
