@@ -2,11 +2,21 @@ const { HttpError } = require('mono-core')
 const { getFindOptions } = require('mono-mongodb')
 
 const jwt = require('express-jwt-session')
-const production = require('../../conf/production').mono.jwt.secret
+const production = require('../../conf/production').secret
+
 
 const bcrypt = require('bcryptjs')
 
 const users = require('./users.service')
+const express = require('express')
+const app = express();
+
+
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 // Function for connect
 function createToken(user) {

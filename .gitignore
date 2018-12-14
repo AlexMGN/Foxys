@@ -16,3 +16,4 @@ coverage
 .DS_Store
 
 # Local conf
+conf/production.js
