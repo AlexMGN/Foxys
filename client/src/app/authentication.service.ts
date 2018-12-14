@@ -6,9 +6,9 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class AuthenticationService {
 
-  static readonly LOGIN_URL = 'http://localhost:8081/login';
-  static readonly REGISTER_URL = 'http://localhost:8081/users';
-  static readonly ADD_CARD = 'http://localhost:8081/cards';
+  static readonly LOGIN_URL = 'https://foxyscard.herokuapp.com/login';
+  static readonly REGISTER_URL = 'https://foxyscard.herokuapp.com/user';
+  static readonly ADD_CARD = 'https://foxyscard.herokuapp.com/cards';
 
     access: boolean;
     token: string;
