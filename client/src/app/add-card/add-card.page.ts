@@ -42,7 +42,6 @@ export class AddCardPage implements OnInit {
 
     async scanBarcode() {
         try {
-
             const options: BarcodeScannerOptions = {
                 prompt: 'Scannez le code barre',
                 torchOn: true

@@ -1,82 +1,85 @@
-const { HttpError } = require('mono-core')
-const { getFindOptions } = require('mono-mongodb')
+const { HttpError } = require('mono-core');
+const { getFindOptions } = require('mono-mongodb');
 
-const jwt = require('express-jwt-session')
-const production = require('../../conf/production').secret
+const jwt = require('jsonwebtoken');
+const production = require('../../conf/production').mono.jwt.secret;
 
-const bcrypt = require('bcryptjs')
 
-const users = require('./users.service')
+const bcrypt = require('bcryptjs');
 
-// Function for connect
-function createToken(user) {
-	return jwt.signToken({ email: user.email }, production, 150);
-}
+const User = require('./users.service');
+const Session = require('../session/session.service');
 
-exports.createUser = async (req, res) => {
-	users.get({
+exports.createUser = (req, res) => {
+
+	User.get({
 		email: req.body.email
-	}).then(function (user) {
+	}).then(async function (user) {
 		if (user) {
 			res.json('Email déjà existant.');
 		} else {
-			bcrypt.genSalt(10, (err, salt) => {
-				bcrypt.hash(req.body.password, salt, (err, passwordCrypt) => {
-					req.body.token = jwt.signToken({ email: req.body.email }, production, 150)
-					users.create({
-						token: req.body.token,
-						username: req.body.username,
-						email: req.body.email,
-						password: passwordCrypt,
-					})
-				})
-			})
-			res.json(req.body)
-		}
-	})
-}
 
-exports.connectUser = async (req, res) => {
-	users.get({
-		email: req.body.email
-	}).then(function (user) {
-		if (!user) {
-			console.log('Il n\'y a aucun utilisateur pour cette adresse email');
-		} else {
-			bcrypt.compare(req.body.password, user.password, function (err, isMatch) {
-				if (isMatch) {
-					console.log('Pass match');
-					res.json({
-						token: createToken(user)
-					})
-				} else {
-					res.redirect('/');
-				}
-			})
+			const salt = await bcrypt.genSalt(10);
+			const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+			User.create({
+				username: req.body.username,
+				email: req.body.email,
+				password: hashedPassword,
+			});
+
+			try {
+				res.send({ user: req.body });
+			} catch (e) {
+				res.status(400).send(e);
+			}
+
 		}
 	})
-}
+};
+
+exports.connectUser = (req, res) => {
+	User.get({
+		email: req.body.email
+	}).then(async function (user) {
+
+		const validPass = await bcrypt.compare(req.body.password, user.password);
+		if (!validPass) {
+			return res.status(400).send('Invalid password');
+		}
+
+		//Create and assign session
+		const token = jwt.sign({_id: user._id, username: user.username}, production);
+		res.header('Authorization', token).send(token);
+
+		Session.create({
+			userId: user._id,
+			token: token,
+		});
+
+	})
+};
 
 exports.listUsers = async (req, res) => {
-	const options = getFindOptions(req.query)
-	const Users = await users.find({}, options).toArray()
+	const options = getFindOptions(req.query);
+	const Users = await User.find({}, options).toArray();
 	res.json(Users)
-}
+};
 
 exports.getUser = async (req, res) => {
-	const user = await users.get(req.params.id)
-	if (!user) throw new HttpError('User not found', 404)
+	const user = await User.get(req.params.id);
+	if (!user) throw new HttpError('User not found', 404);
 	res.json(user)
-}
+};
 
 exports.updateUser = async (req, res) => {
-	const user = await users.update(req.params.id, req.body)
-	if (!user) throw new HttpError('User not found', 404)
+	const user = await User.update(req.params.id, req.body);
+	if (!user) throw new HttpError('User not found', 404);
 	res.json(user)
-}
+};
 
 exports.deleteUser = async (req, res) => {
-	const userDeleted = await users.delete(req.params.id)
-	if (!userDeleted) throw new HttpError('User not found', 404)
+	const userDeleted = await User.delete(req.params.id);
+	if (!userDeleted) throw new HttpError('User not found', 404);
 	res.sendStatus(200)
-}
+};

@@ -1,13 +1,12 @@
 const usersValidation = require('./users.validation');
 const usersCtrl = require('./users.controller');
 
-
 module.exports = [
 	{
 		method: 'POST',
-		path: '/users',
+		path: '/user',
 		validation: usersValidation.createUser,
-		handler: usersCtrl.createUser
+		handler: usersCtrl.createUser,
 	},
 	{
 		method: 'POST',
@@ -39,4 +38,4 @@ module.exports = [
 		validation: usersValidation.deleteUser,
 		handler: usersCtrl.deleteUser
 	}
-]
+];

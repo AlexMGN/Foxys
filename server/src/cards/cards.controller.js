@@ -1,29 +1,46 @@
-const { HttpError } = require('mono-core')
-const { getFindOptions } = require('mono-mongodb')
+const { HttpError } = require('mono-core');
+const Session = require('../session/session.service');
+const { getFindOptions } = require('mono-mongodb');
 
-const cards = require('./cards.service')
+const cards = require('./cards.service');
 
 exports.createCard = async (req, res) => {
 	cards.get({
 		number: req.body.number
-	}).then(function (user) {
+	}).then(async function (user) {
 		if (user) {
 			res.json('Cette carte existe déjà');
 		} else {
+			const token = await Session.get({ token: req.headers.authorization });
+			if (!token) {
+				return res.status(400).send('Invalid token');
+			}
+
 			cards.create({
+				userId: token.userId,
 				number: req.body.number,
 				name: req.body.name
-			})
-			res.json(req.body)
+			});
+
+			try {
+				res.send({ post: req.body });
+			} catch (e) {
+				res.status(400).send(e);
+			}
 		}
 	})
-}
+};
 
 exports.listCards = async (req, res) => {
-	const options = getFindOptions(req.query)
-	const Cards = await cards.find({}, options).toArray()
-	res.json(Cards)
-}
+	const token = await Session.get({ token: req.headers.authorization });
+	const options = getFindOptions(req.query);
+	const card = await cards.find({ userId: token.userId }, options).toArray();
+
+	if (!card) {
+		return res.status(400).send('Invalid Token');
+	}
+	res.json(card);
+};
 
 exports.getCard = async (req, res) => {
 	const card = await cards.get(req.params.id)
