@@ -1,7 +1,7 @@
 const mongoUtils = require('mongodb-utils');
 const { db } = require('mono-mongodb');
 
-const collection = mongoUtils(db.collection('users'));
+const collection = mongoUtils(db.collection('token'));
 
 // See https://github.com/terrajs/mongodb-utils#create
 exports.create = collection.utils.create;

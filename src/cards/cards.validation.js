@@ -6,7 +6,11 @@ const { findValidation } = require('mono-mongodb') // See https://github.com/ter
 
 exports.createCard = {
 	body: Joi.object().keys({
-		name: Joi.string().required().replace(' ', '').lowercase().regex(/^[a-zA-Z]{3,30}$/),
+		userId: Joi.string(),
+		name: Joi.string()
+			.required()
+			.replace(' ', '')
+			.valid(['Leclerc', 'Carrefour', 'Gifi', 'La foirfouile', 'Leader Price', 'Liddl']),
 		number: Joi.number().required()
 	})
 }

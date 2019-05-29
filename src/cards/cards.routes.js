@@ -1,5 +1,5 @@
-const cardsValidation = require('./cards.validation')
-const cardsCtrl = require('./cards.controller')
+const cardsValidation = require('./cards.validation');
+const cardsCtrl = require('./cards.controller');
 
 
 module.exports = [

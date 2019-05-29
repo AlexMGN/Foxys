@@ -38,4 +38,4 @@ module.exports = [
 		validation: usersValidation.deleteUser,
 		handler: usersCtrl.deleteUser
 	}
-]
+];
