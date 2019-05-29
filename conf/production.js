@@ -7,7 +7,7 @@ module.exports = {
 			logLevel: 'combined'
 		},
 		mongodb: {
-			url: 'mongodb+srv://Hiick:5FiEe8yBHwNSKBH@cluster0-bzfup.gcp.mongodb.net/',
+			url: 'mongodb+srv://hiick:foxysorange@cluster0-5sjfx.gcp.mongodb.net/test?retryWrites=true',
 			dbName: 'foxys'
 		}
 	},
