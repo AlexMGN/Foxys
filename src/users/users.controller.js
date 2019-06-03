@@ -50,12 +50,18 @@ exports.connectUser = (req, res) => {
 
 		//Create and assign session
 		const token = jwt.sign({_id: user._id, username: user.username}, production);
-		res.header('Authorization', token).send(token);
+		res.header('Authorization', token);
 
 		Session.create({
 			userId: user._id,
 			token: token,
 		});
+
+		try {
+			res.send(req.body, token);
+		} catch (e) {
+			res.status(400).send(e);
+		}
 
 	})
 };
