@@ -22,10 +22,14 @@ exports.createUser = (req, res) => {
 			const salt = await bcrypt.genSalt(10);
 			const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+			const token = jwt.sign({_id: user._id, username: user.username}, production);
+			res.header('Authorization', token).send(token);
+
 			User.create({
 				username: req.body.username,
 				email: req.body.email,
 				password: hashedPassword,
+				access_token: token
 			});
 
 			try {
