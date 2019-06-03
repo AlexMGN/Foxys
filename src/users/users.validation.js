@@ -15,8 +15,7 @@ exports.createUser = {
 					allowOnly: 'No match passwords',
 				}
 			}
-		}),
-		access_token: Joi.string()
+		})
 	})
 }
 
