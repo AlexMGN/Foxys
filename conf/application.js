@@ -12,7 +12,7 @@ module.exports = {
 		],
 		// See https://terrajs.org/mono/configuration/http
 		http: {
-			port: 8083
+			port: 8081
 		},
 		// See https://terrajs.org/mono/configuration/log
 		log: {
