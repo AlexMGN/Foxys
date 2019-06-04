@@ -58,7 +58,7 @@ exports.connectUser = (req, res) => {
 		});
 
 		try {
-			res.send({ session: token });
+			res.send({ token });
 		} catch (e) {
 			res.status(400).send(e);
 		}
