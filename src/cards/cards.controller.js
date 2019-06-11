@@ -6,11 +6,43 @@ const cards = require('./cards.service');
 const shop = require('../shops/shops.service');
 
 exports.createCard = async (req, res) => {
-			const token = await Session.get({ token: req.headers.authorization });
-			if (!token) {
-				return res.status(400).send('Invalid token');
-			}
 
+	const token = await Session.get({ token: req.headers.authorization });
+	if (!token) {
+		return res.status(400).send('Invalid token');
+	}
+
+	console.log(token.userId);
+	cards.get({
+		userId: token.userId
+	}).then(async function (cardUser) {
+		console.log(cardUser);
+		if (cardUser) {
+			cards.get({
+				name: req.body.name
+			}).then(card => {
+				if (card) {
+					res.json('Cette carte existe déjà');
+				} else {
+					shop.get({
+						name: req.body.name
+					}).then(shop => {
+						cards.create({
+							userId: token.userId,
+							number: req.body.number,
+							name: shop.name,
+							img: shop.img
+						});
+						try {
+							res.send({post: req.body});
+						} catch (e) {
+							res.status(400).send(e);
+						}
+					});
+
+				}
+			})
+		} else {
 			shop.get({
 				name: req.body.name
 			}).then(shop => {
@@ -20,13 +52,14 @@ exports.createCard = async (req, res) => {
 					name: shop.name,
 					img: shop.img
 				});
+				try {
+					res.send({post: req.body});
+				} catch (e) {
+					res.status(400).send(e);
+				}
 			});
-
-			try {
-				res.send({ post: req.body });
-			} catch (e) {
-				res.status(400).send(e);
-			}
+		}
+	})
 };
 
 exports.listCards = async (req, res) => {
