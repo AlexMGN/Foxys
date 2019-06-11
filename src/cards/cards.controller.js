@@ -6,13 +6,6 @@ const cards = require('./cards.service');
 const shop = require('../shops/shops.service');
 
 exports.createCard = async (req, res) => {
-	cards.get({
-		number: req.body.number
-	}).then(async function (card) {
-		if (card) {
-			res.json('Cette carte existe déjà');
-		} else {
-
 			const token = await Session.get({ token: req.headers.authorization });
 			if (!token) {
 				return res.status(400).send('Invalid token');
@@ -34,8 +27,6 @@ exports.createCard = async (req, res) => {
 			} catch (e) {
 				res.status(400).send(e);
 			}
-		}
-	})
 };
 
 exports.listCards = async (req, res) => {
