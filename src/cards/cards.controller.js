@@ -7,7 +7,7 @@ const shop = require('../shops/shops.service');
 
 exports.createCard = async (req, res) => {
 	cards.get({
-		name: req.body.name
+		number: req.body.number
 	}).then(async function (card) {
 		if (card) {
 			res.json('Cette carte existe déjà');
