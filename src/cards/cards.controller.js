@@ -3,24 +3,30 @@ const Session = require('../session/session.service');
 const { getFindOptions } = require('mono-mongodb');
 
 const cards = require('./cards.service');
+const shop = require('../shops/shops.service');
 
 exports.createCard = async (req, res) => {
 	cards.get({
-		number: req.body.number
-	}).then(async function (user) {
-		if (user) {
+		name: req.body.name
+	}).then(async function (card) {
+		if (card) {
 			res.json('Cette carte existe déjà');
 		} else {
+
 			const token = await Session.get({ token: req.headers.authorization });
 			if (!token) {
 				return res.status(400).send('Invalid token');
 			}
 
-			cards.create({
-				userId: token.userId,
-				number: req.body.number,
-				name: req.body.name,
-				img: JSON.img
+			shop.get({
+				name: req.body.name
+			}).then(shop => {
+				cards.create({
+					userId: token.userId,
+					number: req.body.number,
+					name: shop.name,
+					img: shop.img
+				});
 			});
 
 			try {
