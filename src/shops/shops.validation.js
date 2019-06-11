@@ -4,30 +4,29 @@
 const Joi = require('joi') // joi is a dependency of mono
 const { findValidation } = require('mono-mongodb') // See https://github.com/terrajs/mono-mongodb#utils
 
-exports.createCard = {
+exports.createShop = {
 	body: Joi.object().keys({
 		userId: Joi.string(),
 		name: Joi.string()
-			.required()
-			.replace(' ', ''),
-		number: Joi.number().required(),
+			.required(),
+		img: Joi.string().required(),
 	})
 }
 
-exports.listCards = {
+exports.listShops = {
 	params: Joi.object().keys({
 		_id: Joi.string().length(24).alphanum()
 	}),
 	query: Joi.object().keys(findValidation)
 }
 
-exports.getCard = {
+exports.getShop = {
 	params: Joi.object().keys({
 		_id: Joi.string().length(24).alphanum()
 	})
 }
 
-exports.updateCard = {
+exports.updateShop = {
 	params: Joi.object().keys({
 		_id: Joi.string().length(24).alphanum(),
 	}),
@@ -36,7 +35,7 @@ exports.updateCard = {
 	})
 }
 
-exports.deleteCard = {
+exports.deleteShop = {
 	params: Joi.object().keys({
 		_id: Joi.string().length(24).alphanum()
 	})

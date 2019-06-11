@@ -19,7 +19,8 @@ exports.createCard = async (req, res) => {
 			cards.create({
 				userId: token.userId,
 				number: req.body.number,
-				name: req.body.name
+				name: req.body.name,
+				img: JSON.img
 			});
 
 			try {
