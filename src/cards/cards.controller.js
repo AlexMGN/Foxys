@@ -12,7 +12,6 @@ exports.createCard = async (req, res) => {
 		return res.status(400).send('Invalid token');
 	}
 
-	console.log(token.userId);
 	cards.get({
 		userId: token.userId
 	}).then(async function (cardUser) {
@@ -87,6 +86,6 @@ exports.updateCard = async (req, res) => {
 
 exports.deleteCard = async (req, res) => {
 	const cardDeleted = await cards.delete(req.params.id)
-	if (!cardDeleted) throw new HttpError('User not found', 404)
-	res.sendStatus(200)
+	if (!cardDeleted) throw new HttpError('Card not found', 404)
+	res.sendStatus(200).json(cardDeleted)
 }
