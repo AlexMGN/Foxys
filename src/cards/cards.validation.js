@@ -10,7 +10,7 @@ exports.createCard = {
 		name: Joi.string()
 			.required()
 			.replace(' ', ''),
-		number: Joi.number().required(),
+		number: Joi.string().required(),
 	})
 }
 
