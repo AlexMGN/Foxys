@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ card.name }}</ion-title>
+    <ion-button (click)="close()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center">
+    <svg #barcode id="barcode"></svg>
+  </div>
+
+  <ion-button (click)="deleteCard()">
+    <ion-icon slot="icon-only" name="close"></ion-icon>
+  </ion-button>
+</ion-content>

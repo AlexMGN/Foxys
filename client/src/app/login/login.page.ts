@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController, Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
 
@@ -16,7 +16,8 @@ export class LoginPage implements OnInit {
               private auth: AuthenticationService,
               private alertCtrl: AlertController,
               private loadingCtrl: LoadingController,
-              private toast: ToastController) { }
+              private toast: ToastController,
+                private plateform: Platform) { }
 
   ngOnInit() {
   }
@@ -35,15 +36,17 @@ export class LoginPage implements OnInit {
     }
 
     public login() {
-        this.auth.login(this.loginCredentials).subscribe(connect => {
-                if (connect) {
-                    this.nav.navigateRoot('/home');
-                    this.toastControl('Connexion réussie');
-                } else {
-                    this.nav.navigateRoot('/login');
-                    this.toastControl('Mot de passe ou email incorrect');
-                }
-        });
+            this.auth.login(this.loginCredentials).subscribe((data: any) => {
+                localStorage.setItem('_token', data.token);
+                this.toastControl('Connexion réussie');
+            },
+            error => {
+                console.log(error);
+                this.toastControl('Erreur : Connexion impossible');
+            },
+            () => {
+                this.nav.navigateRoot('/home');
+            });
     }
 
     public noSpace() {

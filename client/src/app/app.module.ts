@@ -14,6 +14,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './authentication.service';
 
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ExempleModalPageModule } from './exemple-modal/exemple-modal.module';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,14 +27,17 @@ import { AuthenticationService } from './authentication.service';
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
-      ReactiveFormsModule],
+      ExempleModalPageModule,
+      ReactiveFormsModule,
+      NgbModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
       BarcodeScanner,
       AuthenticationService,
       ToastController,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+      NativeStorage,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

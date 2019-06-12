@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner/ngx';
 import { AuthenticationService } from '../authentication.service';
 import { ToastController } from '@ionic/angular';
 
@@ -13,6 +13,7 @@ export class AddCardPage implements OnInit {
 
     result: BarcodeScanResult;
     cardCredentials = { number: '', name: '' };
+
 
     constructor(private nav: NavController,
                 private auth: AuthenticationService,
@@ -38,19 +39,6 @@ export class AddCardPage implements OnInit {
 
     public addManual() {
       this.nav.navigateRoot('/manualCard');
-    }
-
-    async scanBarcode() {
-        try {
-            const options: BarcodeScannerOptions = {
-                prompt: 'Scannez le code barre',
-                torchOn: true
-            }
-
-            this.result = await this.scan.scan(options);
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     public add() {

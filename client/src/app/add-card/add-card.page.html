@@ -9,7 +9,13 @@
 </ion-header>
 
 <ion-content padding>
-  <p class="scanContent" style="text-align: center; font-size: 18px;">Appuyez sur le bouton<br> pour scanner la carte</p>
+  <ion-item>
+    <ion-select placeholder="Magasin">
+      <ion-select-option value="Leclerc">Leclerc</ion-select-option>
+      <ion-select-option value="Leclerc">Carrefour</ion-select-option>
+      <ion-select-option value="Leader Price">Leader Price</ion-select-option>
+    </ion-select>
+  </ion-item>
   <form #registerForm="ngForm" style="text-align: center">
     <ion-row>
       <ion-col>
@@ -17,9 +23,8 @@
           <ion-button  (click)="add()" ion-button round color="light" class="submit-btn" type="submit" [disabled]="!registerForm.form.valid">
             Ajouter la carte
           </ion-button>
-          <ion-input placeholder="> Nom du magasin" name="name" (keydown)="noSpace()" [(ngModel)]="cardCredentials.name" required></ion-input>
         </ion-list>
-        <ion-input name="number" (keydown)="noSpace()" [(ngModel)]="cardCredentials.number" [value]="result.text" required readonly></ion-input>
+        <ion-input name="number" (keydown)="noSpace()" [(ngModel)]="cardCredentials.number" required readonly></ion-input>
       </ion-col>
     </ion-row>
   </form>

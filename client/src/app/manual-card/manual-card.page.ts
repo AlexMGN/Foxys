@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
-
 
 @Component({
   selector: 'app-manual-card',
@@ -11,14 +11,18 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class ManualCardPage implements OnInit {
 
-    cardCredentials = { number: '', name: '' };
+    scannedData: {};
+
+    cardCredentials = { name: '', number: '' };
 
 
     constructor(public nav: NavController,
-              private auth: AuthenticationService,
-              private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController,
-                private toast: ToastController) { }
+                private auth: AuthenticationService,
+                private alertCtrl: AlertController,
+                private loadingCtrl: LoadingController,
+                private toast: ToastController,
+                private scan: BarcodeScanner) {
+    }
 
   ngOnInit() {
   }
@@ -34,6 +38,7 @@ export class ManualCardPage implements OnInit {
 
   public add() {
         this.auth.add(this.cardCredentials).subscribe(add => {
+            console.log(this.cardCredentials);
             if (this.cardCredentials.name.length < 3) {
                 this.toastControl('Erreur avec l\'ajout de la carte');
             } else if (add) {
@@ -56,6 +61,15 @@ export class ManualCardPage implements OnInit {
 
     public backToHome() {
         this.nav.navigateRoot('/home');
+    }
+
+    async scanBarcode() {
+        this.scan.scan().then((barcodeData: any) => {
+            this.scannedData = barcodeData;
+            this.cardCredentials.number = barcodeData.text;
+        }).catch(err => {
+            console.log('Error', err);
+        });
     }
 
 }

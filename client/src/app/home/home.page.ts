@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import {Component, OnInit } from '@angular/core';
+import { NavController, ModalController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
 import { AlertController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../interface/user';
+import { Cards } from '../interface/cards';
+import {ExempleModalPage} from '../exemple-modal/exemple-modal.page';
 
 
 @Component({
@@ -9,13 +13,39 @@ import { AlertController } from '@ionic/angular';
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-    users;
+    cards: Cards[];
+    user: User[];
+
+
 
     constructor(private nav: NavController,
                 private auth: AuthenticationService,
-                private alert: AlertController) {
+                private alert: AlertController,
+                public http: HttpClient,
+                private modalCtrl: ModalController,
+                ) {
+    }
+
+    ngOnInit() {
+        this.auth.getCards()
+            .subscribe((data: Cards[]) => {
+                    console.log(data);
+                    this.cards = data;
+                },
+                (err) => {
+                    this.nav.navigateRoot('/home');
+                });
+        this.auth.getAccount()
+            .subscribe((data: User[]) => {
+                    this.user = data;
+                },
+                (err) => {
+                    this.nav.navigateRoot('/login');
+                });
+
+
     }
 
     async logout() {
@@ -43,6 +73,17 @@ export class HomePage {
     }
 
     public addCard() {
-        this.nav.navigateRoot('/addCard');
+        this.nav.navigateRoot('/manualCard');
+    }
+
+    async showCard(card) {
+        console.log(card);
+        const modal = await this.modalCtrl.create({
+            component: ExempleModalPage,
+            componentProps: {
+                'card' : card
+            }
+        });
+        await modal.present();
     }
 }

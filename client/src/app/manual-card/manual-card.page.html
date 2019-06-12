@@ -5,32 +5,27 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="add()" #registerForm="ngForm" style="text-align: center">
-    <ion-row>
-      <ion-col>
-        <ion-list inset>
-          <ion-input (keydown)="noSpace()" type="text" placeholder="Numéro de carte" name="number" [(ngModel)]="cardCredentials.number" required></ion-input>
-          <hr>
-          <ion-input placeholder="Nom du magasin" name="name" [(ngModel)]="cardCredentials.name" required></ion-input>
-        </ion-list>
-      </ion-col>
-    </ion-row>
 
-    <ion-button ion-button round color="light" class="submit-btn" type="submit" value="signin" [disabled]="!registerForm.form.valid">
-      Ajouter la carte
-    </ion-button>
-    <p class="annuler" (click)="backToHome()" style="cursor: pointer">Annuler</p>
+  <ion-item>
+    <ion-select placeholder="Magasin" [(ngModel)]="cardCredentials.name">
+      <ion-select-option  value="Leclerc">Leclerc</ion-select-option>
+      <ion-select-option value="Carrefour">Carrefour</ion-select-option>
+      <ion-select-option value="Lidl">Lidl</ion-select-option>
+    </ion-select>
+  </ion-item>
 
-    <img src="../../assets/img/card.png" style="width:27%">
-  </form>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 325 324" class="foxCloud">
-    <defs>
-      <style>
-        .cls-1 {
-          fill: #db3200;
-        }
-      </style>
-    </defs>
-    <path id="background" class="cls-1" d="M-325,0V324H0V312.5A62.507,62.507,0,0,0-62.5,250,62.507,62.507,0,0,1-125,187.5,62.507,62.507,0,0,0-187.5,125,62.507,62.507,0,0,1-250,62.5,62.507,62.507,0,0,0-312.5,0Z" transform="translate(325)"/>
-  </svg>
+
+  <ion-button (click)="scanBarcode()">Scan code</ion-button>
+
+  <div *ngIf="scannedData">
+    <ion-input value="{{ scannedData['text'] }}" [(ngModel)]="cardCredentials.number"></ion-input>
+    <p id="test"></p>
+    <p>Vérifiez si les informations sont correctes</p>
+  </div>
+
+
+  <ion-button (click)="add()">Ajouter la carte</ion-button>
+
+
+
 </ion-content>
