@@ -85,7 +85,10 @@ exports.updateCard = async (req, res) => {
 }
 
 exports.deleteCard = async (req, res) => {
-	const cardDeleted = await cards.delete(req.params.id)
-	if (!cardDeleted) throw new HttpError('Card not found', 404)
-	res.sendStatus(200).json(cardDeleted)
+	try {
+		await cards.delete(req.params.id);
+		return res.sendStatus(200).send(req.params.id);
+	} catch (err) {
+		return res.sendStatus(400).send(err);
+	}
 }
