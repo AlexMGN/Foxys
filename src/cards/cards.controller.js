@@ -87,8 +87,8 @@ exports.updateCard = async (req, res) => {
 exports.deleteCard = async (req, res) => {
 	try {
 		await cards.delete(req.params.id);
-		return res.sendStatus(200).send(req.params.id);
-	} catch (err) {
-		return res.sendStatus(400).send(err);
+		res.send({post: req.body});
+	} catch (e) {
+		res.status(400).send(e);
 	}
-}
+};
