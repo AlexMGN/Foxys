@@ -1,11 +1,10 @@
 import {Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
-import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interface/user';
 import { Cards } from '../interface/cards';
-import {ExempleModalPage} from '../exemple-modal/exemple-modal.page';
+import { ExempleModalPage } from '../exemple-modal/exemple-modal.page';
 
 
 @Component({
@@ -29,47 +28,14 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit() {
-        this.auth.getCards()
-            .subscribe((data: Cards[]) => {
-                    console.log(data);
-                    this.cards = data;
-                },
-                (err) => {
-                    this.nav.navigateRoot('/home');
-                });
+        this.doRefresh(0);
         this.auth.getAccount()
             .subscribe((data: User[]) => {
                     this.user = data;
                 },
                 (err) => {
-                    this.nav.navigateRoot('/login');
+                    this.nav.navigateBack('/login', true);
                 });
-
-
-    }
-
-    async logout() {
-        const alert = await this.alert.create({
-            header: 'Déconnexion',
-            message: 'Voulez-vous vraiment vous déconnecter ?',
-            buttons: [
-                {
-                    text: 'Non',
-                    role: 'non',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Welcome back !');
-                    }
-                }, {
-                    text: 'Oui',
-                    handler: () => {
-                        this.nav.navigateRoot('/login');
-                    }
-                }
-            ]
-        });
-
-        await alert.present();
     }
 
     public addCard() {
@@ -77,13 +43,43 @@ export class HomePage implements OnInit {
     }
 
     async showCard(card) {
-        console.log(card);
         const modal = await this.modalCtrl.create({
             component: ExempleModalPage,
             componentProps: {
                 'card' : card
             }
         });
+
+        modal.onDidDismiss().then(() => {
+            this.doRefresh(0);
+        });
+
         await modal.present();
+    }
+
+    doRefresh(event) {
+        console.log('Refreshing...');
+
+        setTimeout(() => {
+            this.auth.getCards()
+                .subscribe((data: Cards[]) => {
+                        console.log(data);
+                        this.cards = data;
+                    },
+                    (err) => {
+                        this.nav.navigateRoot('/home');
+                    });
+            if (event !== 0) {
+                event.target.complete();
+            }
+        }, 1000);
+    }
+
+    cardPage() {
+        this.nav.navigateRoot('/home');
+    }
+
+    setting() {
+        this.nav.navigateForward('/parameters');
     }
 }

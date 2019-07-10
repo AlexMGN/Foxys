@@ -1,0 +1,77 @@
+{
+  "User": {
+      "id": "doiezngpizrgz",
+      "role": ["USER", "ADMIN", "ENTREPRISE"],
+      "email": "a@a.a",
+      "password": "azert",
+      "nom": "azer",
+      "prenom": "azertg",
+      "sexe": ["Homme", "Femme"],
+      "Etudiant": [{
+          "id": "azert",
+          "age": "123",
+          "adresse": "2 rue oui",
+          "cp": "123456",
+          "ville": "Arrete",
+          "lienCV": "https://PhotoDeNudes",
+          "status": "string",
+          "telephone": "string",
+          "email": "string",
+          "Formation": [{
+              "id": "azert",
+              "niveau": "License",
+              "nom": "Dev MomoPrix"
+          }]
+      }],
+      "Entreprise": [{
+          "id": "string",
+          "email": "string",
+          "logo": "string",
+          "nom": "string",
+          "siege": "string",
+          "description": "coucou",
+          "adresse": "string",
+          "cp": "12345",
+          "ville": "string",
+          "telephone": "string",
+          "cocktail": ["True", "False"],
+          "video": "string",
+          "Job": [{
+              "id": "string",
+              "intitule": "string",
+              "nbr_poste": "0",
+              "description": "azert",
+              "autre": "string",
+              "adresse": "string",
+              "cp": "string",
+              "ville": "string",
+              "date_debut": "date",
+              "id_entreprise": "string",
+              "id_formation": "string",
+              "Formation": [{
+              }]
+          }]
+      }]
+  },
+
+
+
+
+  "Rencontre": {
+      "passage": "string",
+      "Session": [{
+          "id": "string",
+          "date_session": "date"
+      }],
+      "Entreprise": [{
+          "Job": [{
+              "Formation": [{
+
+              }]
+          }]
+      }],
+      "Etudiant": [{
+        "status": "string"
+      }]
+  }
+}

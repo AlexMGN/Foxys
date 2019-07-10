@@ -1,8 +1,12 @@
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
+import { Shop } from '../interface/shop';
+import * as _ from 'lodash'; // Sort method
+
+
 
 @Component({
   selector: 'app-manual-card',
@@ -13,8 +17,13 @@ export class ManualCardPage implements OnInit {
 
     scannedData: {};
 
+    afterScan = false;
+
+    shops: Shop[];
+
     cardCredentials = { name: '', number: '' };
 
+    searchTerm;
 
     constructor(public nav: NavController,
                 private auth: AuthenticationService,
@@ -24,7 +33,16 @@ export class ManualCardPage implements OnInit {
                 private scan: BarcodeScanner) {
     }
 
+
   ngOnInit() {
+      this.auth.getShops()
+          .subscribe((data: Shop[]) => {
+                  this.shops = _.sortBy(data, 'name');
+              },
+              (err) => {
+                  this.nav.navigateBack('/login', true);
+                  this.toastControl(err);
+              });
   }
 
     async toastControl (msg: string) {
@@ -51,25 +69,43 @@ export class ManualCardPage implements OnInit {
         });
     }
 
-    public noSpace() {
-        if ((<any>event).keyCode === 32) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public backToHome() {
-        this.nav.navigateRoot('/home');
-    }
-
-    async scanBarcode() {
+    async scanBarcode(name) {
+        this.cardCredentials.name = name;
         this.scan.scan().then((barcodeData: any) => {
             this.scannedData = barcodeData;
             this.cardCredentials.number = barcodeData.text;
+            this.afterScan = true;
         }).catch(err => {
+            this.afterScan = false;
             console.log('Error', err);
         });
+    }
+
+    setFilteredItems() {
+        this.auth.getShops()
+            .subscribe((data: Shop[]) => {
+                    data = this.filterItems(this.searchTerm);
+                    return data;
+                },
+                (err) => {
+                    this.nav.navigateBack('/login', true);
+                    this.toastControl(err);
+                });
+    }
+
+    filterItems(searchTerm) {
+        this.auth.getShops()
+            .subscribe((data: Shop[]) => {
+                this.shops = data.filter(shop => {
+                    console.log(shop.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+                    try {
+                        return shop.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+                    } catch (e) {
+                        return '';
+                    }
+                });
+            });
+        return this.shops;
     }
 
 }

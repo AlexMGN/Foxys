@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, LoadingController, Platform } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../authentication.service';
 
@@ -16,8 +16,7 @@ export class LoginPage implements OnInit {
               private auth: AuthenticationService,
               private alertCtrl: AlertController,
               private loadingCtrl: LoadingController,
-              private toast: ToastController,
-                private plateform: Platform) { }
+              private toast: ToastController) { }
 
   ngOnInit() {
   }
@@ -32,7 +31,7 @@ export class LoginPage implements OnInit {
     }
 
     public createAccount() {
-        this.nav.navigateRoot('/register');
+        this.nav.navigateBack('/register', true);
     }
 
     public login() {
@@ -45,7 +44,7 @@ export class LoginPage implements OnInit {
                 this.toastControl('Erreur : Connexion impossible');
             },
             () => {
-                this.nav.navigateRoot('/home');
+                this.nav.navigateForward('/home', true);
             });
     }
 
@@ -56,5 +55,6 @@ export class LoginPage implements OnInit {
             return true;
         }
     }
+
 
 }

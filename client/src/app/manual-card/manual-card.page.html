@@ -4,28 +4,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding text-center>
 
-  <ion-item>
-    <ion-select placeholder="Magasin" [(ngModel)]="cardCredentials.name">
-      <ion-select-option  value="Leclerc">Leclerc</ion-select-option>
-      <ion-select-option value="Carrefour">Carrefour</ion-select-option>
-      <ion-select-option value="Lidl">Lidl</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-
-  <ion-button (click)="scanBarcode()">Scan code</ion-button>
+  <div class="container">
+    <ion-searchbar [(ngModel)]="searchTerm"  (ionChange)="setFilteredItems()" placeholder="Rechercher" animated="true"></ion-searchbar>
+    <ion-list>
+      <div *ngFor="let shop of shops">
+          <ion-item  *ngIf="!afterScan" (click)="scanBarcode(shop.name)">
+            <ion-label class="d-flex align-items-center" value="shop.name"><div class="img-card"><img src="{{ shop.img }}" alt=""></div>{{ shop.name }}</ion-label>
+          </ion-item>
+      </div>
+    </ion-list>
+  </div>
 
   <div *ngIf="scannedData">
+    <ion-input [(ngModel)]="cardCredentials.name"></ion-input>
     <ion-input value="{{ scannedData['text'] }}" [(ngModel)]="cardCredentials.number"></ion-input>
     <p id="test"></p>
     <p>Vérifiez si les informations sont correctes</p>
+    <ion-button (click)="add()">Ajouter la carte</ion-button>
   </div>
-
-
-  <ion-button (click)="add()">Ajouter la carte</ion-button>
-
-
 
 </ion-content>

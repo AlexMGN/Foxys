@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { NavController, ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AbstractControl } from '@angular/forms';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -14,45 +11,38 @@ export class RegisterPage implements OnInit {
 
     registerCredentials = { username: '', email: '', password: '', confirmPass: '' };
 
-    registerForm: FormGroup;
     submitted = false;
+
+    verifMail = new RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
 
   constructor(private auth: AuthenticationService,
               public nav: NavController,
-              private toast: ToastController,
-              private formBuilder: FormBuilder) { }
+              private toast: ToastController) { }
 
   ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmPass: ['', [Validators.required, Validators.minLength(6)]]
-      });
   }
-
-  get f() { return this.registerForm.controls; }
 
     async toastControl (msg: string) {
         const daToast = await this.toast.create({
             message: msg,
             duration: 5000,
-            position: 'bottom',
+            position: 'bottom'
         });
         daToast.present();
     }
 
     public register() {
       this.submitted = true;
-
-        if (this.registerForm.invalid) {
-            return;
-        } else if (this.registerCredentials.password !== this.registerCredentials.confirmPass) {
-            this.toastControl('Les deux mots de passes sont différentes');
+      if (this.registerCredentials.username.length < 5) {
+          this.toastControl('Le nom d\'utilisateur ne peut pas être \ninférieur à 5 caractères.');
+      } else if (!this.verifMail.test(this.registerCredentials.email)) {
+          this.toastControl('L\'email n\'est pas valide.');
+      } else if (this.registerCredentials.password !== this.registerCredentials.confirmPass) {
+            this.toastControl('Les deux mots de passes sont différents.');
         } else {
             this.auth.register(this.registerCredentials).subscribe(registered => {
                 if (registered) {
-                    this.nav.navigateRoot('/login');
+                    this.nav.navigateForward('/login', true);
                     this.toastControl('Inscription réussie !');
                 } else {
                     this.submitted = false;
@@ -71,7 +61,7 @@ export class RegisterPage implements OnInit {
     }
 
     public connectAccount() {
-        this.nav.navigateRoot('/login');
+        this.nav.navigateForward('/login', true);
     }
 
 }

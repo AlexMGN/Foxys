@@ -13,3 +13,16 @@
 .modal {
   display: flex !important;
 }
+
+rect {
+  height: 100px;
+}
+
+text {
+  font: 20px Amazonas !important;
+  letter-spacing: 2px;
+}
+
+.toast-message {
+  white-space: pre-wrap;
+}

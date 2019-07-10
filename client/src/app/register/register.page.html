@@ -1,37 +1,21 @@
-<ion-content padding style="text-align:center;margin-top: 50px">
-  <form [formGroup]="registerForm" (ngSubmit)="register()" class="registerForm">
-    <ion-input type="text" (keydown)="noSpace()" placeholder="Username" formControlName="username" class="form-control capit" [(ngModel)]="registerCredentials.username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"></ion-input>
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">First Name is required</div><br>
-      </div>
-    <hr>
-      <ion-input type="text" (keydown)="noSpace()" placeholder="Email" formControlName="email" class="form-control" [(ngModel)]="registerCredentials.email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
-      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors.required">Email is required</div><br>
-        <div *ngIf="f.email.errors.email">Email must be a valid email address</div><br>
-      </div>
-    <hr>
-      <ion-input type="password" placeholder="Password" formControlName="password" class="form-control" [(ngModel)]="registerCredentials.password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Password is required</div><br>
-        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div><br>
-      </div>
-    <hr>
-      <ion-input type="password" placeholder="Confirm password" formControlName="confirmPass" class="form-control" [(ngModel)]="registerCredentials.confirmPass" [ngClass]="{ 'is-invalid': submitted && f.confirmPass.errors }"></ion-input>
-      <div *ngIf="submitted && f.confirmPass.errors" class="invalid-feedback">
-        <div *ngIf="f.confirmPass.errors.required">Password is required</div><br>
-        <div *ngIf="f.confirmPass.errors.minlength">Password must be at least 6 characters</div><br>
-      </div>
+<ion-content class="bg-image no-scroll" padding style="text-align:center;">
+  <form #registerForm="ngForm" (ngSubmit)="register()">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-input class="input" name="username" type="text" (keydown)="noSpace()" placeholder="Username" [(ngModel)]="registerCredentials.username" required></ion-input>
+          <ion-input class="input" (keydown)="noSpace()" type="email" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+          <ion-input class="input" type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+          <ion-input type="password" name="confirmPass" placeholder="Confirm password" [(ngModel)]="registerCredentials.confirmPass" required></ion-input>
+        </ion-list>
+      </ion-col>
+    </ion-row>
 
-    <ion-button ion-button round color="light" class="submit-btn" type="submit" value="signup">
-      Inscription
-    </ion-button>
-
-    <p class="foxColor" (click)="connectAccount()">Déjà un compte ?</p>
+    <button class="submit-btn" type="submit" value="signin" [disabled]="!registerForm.form.valid">
+      Inscription <div class="log"><ion-icon style="color: white" name="md-arrow-round-forward"></ion-icon></div>
+    </button>
+    <p class="register" (click)="connectAccount()">Vous avez déjà un compte ?</p>
   </form>
-
-  <img src="../../assets/img/foxysRegister.png" style="width:60%">
-
 </ion-content>
 
 

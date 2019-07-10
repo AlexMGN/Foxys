@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Shop } from './interface/shop';
 
 
 @Injectable()
@@ -13,13 +14,14 @@ export class AuthenticationService {
   static readonly USER_URL = 'https://foxyscard.herokuapp.com/users';
   static readonly LOGIN_URL = 'https://foxyscard.herokuapp.com/login';
   static readonly ADD_CARD = 'https://foxyscard.herokuapp.com/cards';
+  static readonly SHOPS = 'https://foxyscard.herokuapp.com/shops';
 
     access: boolean;
     token: any;
+    shops: Shop[];
 
   constructor(public http: HttpClient,
-              public storage: NativeStorage,
-              ) { }
+              public storage: NativeStorage) {}
 
     // Login
     public login(credentials) {
@@ -88,6 +90,12 @@ export class AuthenticationService {
             })
         };
         return this.http.get(AuthenticationService.ADD_CARD, httpOptions);
+    }
+
+
+    // Get Card
+    getShops() {
+        return this.http.get(AuthenticationService.SHOPS);
     }
 
     // Add Card

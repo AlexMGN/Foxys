@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="476.551" height="243.437" viewBox="0 0 476.551 243.437">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.789" y1="0.428" x2="0.427" y2="0.417" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f06a2d"/>
+      <stop offset="1" stop-color="#fdad88"/>
+    </linearGradient>
+  </defs>
+  <g id="Header" transform="translate(78.551)">
+    <rect id="Rectangle_25" data-name="Rectangle 25" width="375" height="203" fill="#f59265"/>
+    <path id="Tracé_55" data-name="Tracé 55" d="M2955.4,122.947s-39.216-53-185.889,0-289.1-43.521-289.1-43.521V242.06s-4.057,21.1,44.833,38.871,394.618,0,394.618,0,32.218-18.149,35.541-32.61S2955.4,122.947,2955.4,122.947Z" transform="translate(-2558.871 -45.39)" fill="#ffb391" opacity="0.803"/>
+    <circle id="Ellipse_55" data-name="Ellipse 55" cx="3" cy="3" r="3" transform="translate(251.042 139.78) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_56" data-name="Ellipse 56" cx="3" cy="3" r="3" transform="translate(241.042 169.78) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_57" data-name="Ellipse 57" cx="3" cy="3" r="3" transform="translate(151.042 159.78) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_58" data-name="Ellipse 58" cx="3" cy="3" r="3" transform="translate(71.042 129.78) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_41" data-name="Ellipse 41" cx="3" cy="3" r="3" transform="translate(33.785 180.038) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_34" data-name="Ellipse 34" cx="3" cy="3" r="3" transform="translate(341.042 169.78) rotate(-97)" fill="#f06a2d" opacity="0.997"/>
+    <circle id="Ellipse_44" data-name="Ellipse 44" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 334.749, 50.979)" opacity="0.997" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_45" data-name="Ellipse 45" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 27.376, 92.142)" fill="#fdad88" opacity="0.997"/>
+    <circle id="Ellipse_46" data-name="Ellipse 46" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 86.67, 35.712)" fill="#fdad88" opacity="0.997"/>
+    <circle id="Ellipse_47" data-name="Ellipse 47" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 189.19, 23.517)" fill="#fdad88" opacity="0.997"/>
+    <circle id="Ellipse_48" data-name="Ellipse 48" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 207.592, 54.522)" fill="#fdad88" opacity="0.997"/>
+    <circle id="Ellipse_49" data-name="Ellipse 49" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 269.08, 27.703)" fill="#fdad88" opacity="0.997"/>
+    <circle id="Ellipse_50" data-name="Ellipse 50" cx="3" cy="3" r="3" transform="matrix(0.07, 0.998, -0.998, 0.07, 136.67, 75.712)" fill="#fdad88" opacity="0.997"/>
+  </g>
+</svg>

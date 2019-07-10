@@ -1,18 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ card.name }}</ion-title>
-    <ion-button (click)="close()">
-      <ion-icon slot="icon-only" name="close"></ion-icon>
-    </ion-button>
+    <img style="width: 100%;" src="{{ card.img }}">
+
+    <button (click)="close()" type="button" class="btn close-modal">
+      <ion-icon name="arrow-down"></ion-icon>
+    </button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
   <div style="text-align: center">
-    <svg #barcode id="barcode"></svg>
+    <svg style="width: 80% !important;" #barcode id="barcode"></svg>
+    <hr>
+    <button (click)="deleteCard()" type="button" class="btn btn-outline-danger">Supprimer la carte</button>
+    <hr>
+    <p>Si le scan ne fonctionne pas, demander simplement au caissier d'entrer
+    manuellement le numéro de votre carte.</p>
+    <hr style="width: 50%;">
+    <p style="color: gray">Pourquoi le scan ne fonctionne pas ?</p>
+    <p style="padding-left: 30px; padding-right: 30px;">Les scanners modernes basés sur des images peuvent scanner des code-barres affichés
+    sur smartphone en quelques secondes. <br><br> Toutefois, certains magasins utilisent encore
+    des technologies de scanner plus âgés (par exemple, les lecteurs optique laser). Avec eux,
+    scanner peut s'avérer problématique.</p>
   </div>
 
-  <ion-button (click)="deleteCard()">
-    <ion-icon slot="icon-only" name="close"></ion-icon>
-  </ion-button>
 </ion-content>

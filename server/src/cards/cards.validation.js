@@ -9,9 +9,8 @@ exports.createCard = {
 		userId: Joi.string(),
 		name: Joi.string()
 			.required()
-			.replace(' ', '')
-			.valid(['Leclerc', 'Carrefour', 'Gifi', 'La foirfouile', 'Leader Price', 'Liddl']),
-		number: Joi.number().required()
+			.replace(' ', ''),
+		number: Joi.string().required(),
 	})
 }
 

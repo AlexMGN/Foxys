@@ -17,7 +17,10 @@ import { AuthenticationService } from './authentication.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExempleModalPageModule } from './exemple-modal/exemple-modal.module';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +32,8 @@ import { ExempleModalPageModule } from './exemple-modal/exemple-modal.module';
       FormsModule,
       ExempleModalPageModule,
       ReactiveFormsModule,
+      FilterPipeModule,
+      Ng2OrderModule,
       NgbModule.forRoot()],
   providers: [
     StatusBar,
@@ -37,7 +42,8 @@ import { ExempleModalPageModule } from './exemple-modal/exemple-modal.module';
       AuthenticationService,
       ToastController,
       NativeStorage,
-      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      NativePageTransitions,
   ],
   bootstrap: [AppComponent]
 })

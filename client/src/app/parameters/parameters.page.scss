@@ -1,0 +1,106 @@
+* {
+  outline: 0;
+}
+.add {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 13%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+.addCard {
+  background-color: white;
+  border-radius: 100%;
+  color: white;
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -50%;
+  transform: translateY(25%);
+}
+.bg-image {
+  --background: url(../../assets/img/header.svg)78% 4%/128% 140% no-repeat;
+}
+ion-header {
+  height: 22%;
+}
+ion-content {
+  --background: #f0f3fc;
+}
+ion-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+ion-title {
+  color: white;
+  font-family: Amazonas;
+  letter-spacing: 1px;
+  font-size: 3em;
+  font-weight: normal;
+  padding: 0;
+}
+.plus {
+  color: white;
+  font-size: 30px;
+}
+.card {
+  color: #FF986E;
+  font-size: 36px;
+  border: 0;
+  top: 6px;
+  right: 6px;
+}
+.cardPos {
+  position: absolute;
+  left: 0;
+  width: 44%;
+  display: flex;
+  justify-content: center;
+}
+.plus {
+  color: #FF986E;
+  font-size: 70px;
+ }
+.settings {
+  color: #FF986E;
+  font-size: 42px;
+}
+.settingPos {
+  position: absolute;
+  right: 0;
+  width: 44%;
+  display: flex;
+  top: 4px;
+  justify-content: center;
+}
+.inner-scroll {
+  padding: 0 !important;
+}
+.disconnected {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 16%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #e74149;
+  background-color: #f0f3fc;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 465px;
+  height: 100%;
+  padding-bottom: 15px;
+}

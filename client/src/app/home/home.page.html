@@ -1,21 +1,26 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="bg-image">
     <ion-title>
-      Cartes
+        Cartes
     </ion-title>
-    <button (click)="addCard()">
-      <ion-icon name="add" style="font-size: 40px; color: #db3200"></ion-icon>
-    </button>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="refresh"
+            refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid>
     <ion-row>
       <ion-col size="6" size-sm *ngFor="let card of cards">
         <div [ngStyle]="{'background-image' : 'url('+ card.img +')'}" (click)="showCard(card)" style="
         height: 100px;
-        background-size: cover;
+        background-size: 106%;
         background-repeat: no-repeat;
         width: 100%;
         background-position: center;
@@ -25,8 +30,15 @@
     </ion-row>
   </ion-grid>
 
-  <button class="logout" ion-button (click)="logout()">
-    <img src="../../assets/img/homefox.png" width="100">
-  </button>
-  <p class="logoutStyle" style="color: white">Logout</p>
+  <div class="add">
+    <div class="cardPos" (click)="cardPage()">
+      <ion-icon class="card" name="card"></ion-icon>
+    </div>
+    <div class="addCard" (click)="addCard()">
+      <ion-icon class="plus" name="add"></ion-icon>
+    </div>
+    <div class="settingPos" (click)="setting()">
+      <ion-icon class="settings" name="settings"></ion-icon>
+    </div>
+  </div>
 </ion-content>

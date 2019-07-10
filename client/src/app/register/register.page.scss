@@ -1,26 +1,66 @@
-hr {
-  display: block;
-  border-style: inset;
-  border-width: 0.1px;
+ion-input {
+  border: 1px solid orange;
+  border-radius: 20px;
+  background-color: #fff;
 }
-input {
+ion-list {
   background-color: transparent;
-  border: 0px solid;
-  height: 20px;
-  width: 160px;
-  color: #CCC;
 }
-.foxColor {
-  color: orange;
+.bg-image {
+  --background: url(../../assets/img/logininput.png)62% 0/144% 115% no-repeat;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f3fc;
 }
-.capit {
-  text-transform: capitalize;
+
+.no-scroll {
+  overflow: hidden;
 }
-.registerForm {
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 50px;
+.input {
+  margin-bottom: 25px;
 }
-.submit-btn {
-  margin-top: 30px;
+form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: transparent;
+}
+ion-row {
+  width: 88%;
+}
+button {
+  background-color: white;
+  position: absolute;
+  bottom: 36px;
+  right: 40px;
+  border-radius: 43px;
+  color: #FF8B5D;
+  display: flex;
+  align-items: center;
+  padding: 0px 32px;
+  font-size: 19px;
+  width: 180px;
+}
+.log {
+  background: linear-gradient(#FFDEC7, #FF986E);;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  border: 5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  position: relative;
+  right: 0;
+  margin-left: 10px;
+}
+ion-icon {
+  font-size: 25px;
+}
+.register {
+  color: #FF8B5D;
 }
